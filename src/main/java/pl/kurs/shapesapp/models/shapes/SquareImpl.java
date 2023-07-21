@@ -1,13 +1,17 @@
 package pl.kurs.shapesapp.models.shapes;
 
+import com.querydsl.core.BooleanBuilder;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import pl.kurs.shapesapp.commands.CreateShapeCommands;
 import pl.kurs.shapesapp.dto.ShapeDto;
 import pl.kurs.shapesapp.dto.SquareDto;
 import pl.kurs.shapesapp.exceptions.WrongEntityParametersException;
+import pl.kurs.shapesapp.models.QShape;
 import pl.kurs.shapesapp.models.Shape;
 import pl.kurs.shapesapp.models.Square;
+
+import java.util.Optional;
 
 @Component
 public class SquareImpl implements IShape{

@@ -9,6 +9,10 @@ import pl.kurs.shapesapp.dto.ShapeDto;
 import pl.kurs.shapesapp.models.Shape;
 import pl.kurs.shapesapp.services.ShapeService;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/v1/shapes")
 @RequiredArgsConstructor
@@ -20,4 +24,11 @@ public class ShapeController {
         Shape shape = shapeService.create(createShapeCommands);
         return new ResponseEntity<>(shapeService.getResponse(shape), HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<ShapeDto>> getAllShape(@RequestParam Map<String, String> parameters){
+        List<Shape> shapes = shapeService.getAllShape(parameters);
+        return new ResponseEntity<>(shapes.stream().map(shapeService::getResponse).collect(Collectors.toList()), HttpStatus.OK);
+    }
+
 }
