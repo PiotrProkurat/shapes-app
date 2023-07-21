@@ -19,7 +19,7 @@ public class RectangleImpl implements IShape{
     }
     @Override
     public String type() {
-        return "Rectangle";
+        return "rectangle";
     }
 
     @Override
@@ -28,7 +28,7 @@ public class RectangleImpl implements IShape{
             throw new WrongEntityParametersException("Wrong rectangle parameters");
         }
         Rectangle rectangle = new Rectangle();
-        rectangle.setType(createShapeCommands.getType());
+        rectangle.setType(createShapeCommands.getType().trim().toLowerCase());
         rectangle.setWidth(createShapeCommands.getParameters().get(0));
         rectangle.setHeight(createShapeCommands.getParameters().get(1));
         return rectangle;

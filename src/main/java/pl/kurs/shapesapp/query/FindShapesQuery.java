@@ -3,7 +3,6 @@ package pl.kurs.shapesapp.query;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.NumberExpression;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
@@ -30,15 +29,6 @@ public class FindShapesQuery {
             conditions.or(shapeImplementation.toPredicate(parameters));
         }
         Optional.ofNullable(parameters.get("type")).map(QShape.shape.type::containsIgnoreCase).ifPresent(conditions::and);
-        return conditions;
-    }
-
-    public static BooleanBuilder compareAreaAndPerimeter(Map<String, String> parameters, NumberExpression<Double> area, NumberExpression<Double> perimeter) {
-        BooleanBuilder conditions = new BooleanBuilder();
-        Optional.ofNullable(parameters.get("areaFrom")).map(x -> (area).goe(Double.parseDouble(x))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("areaTo")).map(x -> (area).loe(Double.parseDouble(x))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("perimeterFrom")).map(x -> (perimeter).goe(Double.parseDouble(x))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("perimeterTo")).map(x -> (perimeter).loe(Double.parseDouble(x))).ifPresent(conditions::and);
         return conditions;
     }
 }

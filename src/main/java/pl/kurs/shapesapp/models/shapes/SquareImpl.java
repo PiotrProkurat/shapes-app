@@ -20,7 +20,7 @@ public class SquareImpl implements IShape{
 
     @Override
     public String type() {
-        return "Square";
+        return "square";
     }
 
     @Override
@@ -29,7 +29,7 @@ public class SquareImpl implements IShape{
             throw new WrongEntityParametersException("Wrong square parameters");
         }
         Square square = new Square();
-        square.setType(createShapeCommands.getType());
+        square.setType(createShapeCommands.getType().trim().toLowerCase());
         square.setWidth(createShapeCommands.getParameters().get(0));
         return square;
     }

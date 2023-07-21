@@ -24,8 +24,10 @@ public class FindCircleQueryImpl implements IFindShapesQuery{
         NumberExpression<Double> perimeter = qCircle.radius.multiply(2 * Math.PI);
         Optional.ofNullable(parameters.get("radiusFrom")).map(x -> qCircle.radius.goe(Double.parseDouble(x))).ifPresent(conditions::and);
         Optional.ofNullable(parameters.get("radiusTo")).map(x -> qCircle.radius.loe(Double.parseDouble(x))).ifPresent(conditions::and);
-        conditions.and(FindShapesQuery.compareAreaAndPerimeter(parameters, area, perimeter));
-        conditions.and(qCircle.type.containsIgnoreCase("Circle"));
+        Optional.ofNullable(parameters.get("areaFrom")).map(x -> (area).goe(Double.parseDouble(x)).and(qCircle.type.containsIgnoreCase("circle"))).ifPresent(conditions::and);
+        Optional.ofNullable(parameters.get("areaTo")).map(x -> (area).loe(Double.parseDouble(x)).and(qCircle.type.containsIgnoreCase("circle"))).ifPresent(conditions::and);
+        Optional.ofNullable(parameters.get("perimeterFrom")).map(x -> (perimeter).goe(Double.parseDouble(x)).and(qCircle.type.containsIgnoreCase("circle"))).ifPresent(conditions::and);
+        Optional.ofNullable(parameters.get("perimeterTo")).map(x -> (perimeter).loe(Double.parseDouble(x)).and(qCircle.type.containsIgnoreCase("circle"))).ifPresent(conditions::and);
         return conditions;
     }
 

@@ -24,8 +24,10 @@ public class FindSquareQueryImpl implements IFindShapesQuery {
         NumberExpression<Double> perimeter = qSquare.width.multiply(4);
         Optional.ofNullable(parameters.get("widthFrom")).map(x -> qSquare.width.goe(Double.parseDouble(x))).ifPresent(conditions::and);
         Optional.ofNullable(parameters.get("widthTo")).map(x -> qSquare.width.loe(Double.parseDouble(x))).ifPresent(conditions::and);
-        conditions.and(FindShapesQuery.compareAreaAndPerimeter(parameters, area, perimeter));
-        conditions.and(qSquare.type.containsIgnoreCase("Square"));
+        Optional.ofNullable(parameters.get("areaFrom")).map(x -> (area).goe(Double.parseDouble(x)).and(qSquare.type.containsIgnoreCase("square"))).ifPresent(conditions::and);
+        Optional.ofNullable(parameters.get("areaTo")).map(x -> (area).loe(Double.parseDouble(x)).and(qSquare.type.containsIgnoreCase("square"))).ifPresent(conditions::and);
+        Optional.ofNullable(parameters.get("perimeterFrom")).map(x -> (perimeter).goe(Double.parseDouble(x)).and(qSquare.type.containsIgnoreCase("square"))).ifPresent(conditions::and);
+        Optional.ofNullable(parameters.get("perimeterTo")).map(x -> (perimeter).loe(Double.parseDouble(x)).and(qSquare.type.containsIgnoreCase("square"))).ifPresent(conditions::and);
         return conditions;
     }
 }

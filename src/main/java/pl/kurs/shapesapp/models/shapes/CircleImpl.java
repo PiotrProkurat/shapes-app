@@ -20,7 +20,7 @@ public class CircleImpl implements IShape{
 
     @Override
     public String type() {
-        return "Circle";
+        return "circle";
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CircleImpl implements IShape{
             throw new WrongEntityParametersException("Wrong circle parameters");
         }
         Circle circle = new Circle();
-        circle.setType(createShapeCommands.getType());
+        circle.setType(createShapeCommands.getType().trim().toLowerCase());
         circle.setRadius(createShapeCommands.getParameters().get(0));
         return circle;
     }

@@ -29,10 +29,10 @@ public class ShapeService {
     }
 
     public Shape create(CreateShapeCommands createShapeCommands) {
-        if (!shapes.containsKey(createShapeCommands.getType())) {
+        if (!shapes.containsKey(createShapeCommands.getType().trim().toLowerCase())) {
             throw new UnknownShapeException("Unknown shape type: " + createShapeCommands.getType());
         }
-        Shape shape = shapes.get(createShapeCommands.getType()).createShape(createShapeCommands);
+        Shape shape = shapes.get(createShapeCommands.getType().trim().toLowerCase()).createShape(createShapeCommands);
         shape.setCreatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
         shape.setCreatedAt(LocalDateTime.now().withNano(0));
         return shapeRepository.save(

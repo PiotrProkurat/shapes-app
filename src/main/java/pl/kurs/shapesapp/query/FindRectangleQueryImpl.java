@@ -27,8 +27,10 @@ public class FindRectangleQueryImpl implements IFindShapesQuery{
         Optional.ofNullable(parameters.get("widthTo")).map(x -> qRectangle.width.loe(Double.parseDouble(x))).ifPresent(conditions::and);
         Optional.ofNullable(parameters.get("heightFrom")).map(x -> qRectangle.height.goe(Double.parseDouble(x))).ifPresent(conditions::and);
         Optional.ofNullable(parameters.get("heightTo")).map(x -> qRectangle.height.loe(Double.parseDouble(x))).ifPresent(conditions::and);
-        conditions.and(FindShapesQuery.compareAreaAndPerimeter(parameters, area, perimeter));
-        conditions.and(qRectangle.type.containsIgnoreCase("Rectangle"));
+        Optional.ofNullable(parameters.get("areaFrom")).map(x -> (area).goe(Double.parseDouble(x)).and(qRectangle.type.containsIgnoreCase("rectangle"))).ifPresent(conditions::and);
+        Optional.ofNullable(parameters.get("areaTo")).map(x -> (area).loe(Double.parseDouble(x)).and(qRectangle.type.containsIgnoreCase("rectangle"))).ifPresent(conditions::and);
+        Optional.ofNullable(parameters.get("perimeterFrom")).map(x -> (perimeter).goe(Double.parseDouble(x)).and(qRectangle.type.containsIgnoreCase("rectangle"))).ifPresent(conditions::and);
+        Optional.ofNullable(parameters.get("perimeterTo")).map(x -> (perimeter).loe(Double.parseDouble(x)).and(qRectangle.type.containsIgnoreCase("rectangle"))).ifPresent(conditions::and);
         return conditions;
     }
 }
