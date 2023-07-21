@@ -1,5 +1,6 @@
 package pl.kurs.shapesapp.services;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.kurs.shapesapp.commands.CreateShapeCommands;
 import pl.kurs.shapesapp.dto.ShapeDto;
@@ -10,6 +11,7 @@ import pl.kurs.shapesapp.models.shapes.IShape;
 import pl.kurs.shapesapp.query.FindShapesQuery;
 import pl.kurs.shapesapp.repositories.ShapeRepository;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -31,6 +33,8 @@ public class ShapeService {
             throw new UnknownShapeException("Unknown shape type: " + createShapeCommands.getType());
         }
         Shape shape = shapes.get(createShapeCommands.getType()).createShape(createShapeCommands);
+        shape.setCreatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
+        shape.setCreatedAt(LocalDateTime.now().withNano(0));
         return shapeRepository.save(
                 Optional.ofNullable(shape)
                         .filter(x -> Objects.isNull(x.getId()))

@@ -4,8 +4,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class SquareDto extends ShapeDto {
     private double width;
     private double area;

@@ -7,5 +7,4 @@ import pl.kurs.shapesapp.models.Shape;
 
 public interface ShapeRepository extends JpaRepository<Shape, Long>, QuerydslPredicateExecutor<Shape> {
 
-
 }

@@ -3,7 +3,6 @@ package pl.kurs.shapesapp.query;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.NumberExpression;
 import lombok.Getter;
 import lombok.Setter;
