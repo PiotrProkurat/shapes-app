@@ -1,9 +1,10 @@
 package pl.kurs.shapesapp.validators;
 
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import pl.kurs.shapesapp.models.shapes.IShape;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;

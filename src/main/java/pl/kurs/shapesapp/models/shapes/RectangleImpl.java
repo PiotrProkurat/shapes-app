@@ -2,12 +2,21 @@ package pl.kurs.shapesapp.models.shapes;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import pl.kurs.shapesapp.commands.CreateShapeCommands;
+import pl.kurs.shapesapp.commands.CreateShapeCommand;
+import pl.kurs.shapesapp.commands.UpdateShapeCommand;
 import pl.kurs.shapesapp.dto.RectangleDto;
 import pl.kurs.shapesapp.dto.ShapeDto;
+import pl.kurs.shapesapp.exceptions.TheSameParametersException;
 import pl.kurs.shapesapp.exceptions.WrongEntityParametersException;
 import pl.kurs.shapesapp.models.Rectangle;
 import pl.kurs.shapesapp.models.Shape;
+import pl.kurs.shapesapp.models.Square;
+import pl.kurs.shapesapp.models.changes.ChangeDetails;
+import pl.kurs.shapesapp.models.changes.ChangeEvent;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class RectangleImpl implements IShape{
@@ -23,15 +32,42 @@ public class RectangleImpl implements IShape{
     }
 
     @Override
-    public Shape createShape(CreateShapeCommands createShapeCommands) {
-        if(createShapeCommands.getParameters().size() != 2 || createShapeCommands.getParameters().get(0) <= 0 || createShapeCommands.getParameters().get(1) <= 0){
+    public Shape createShape(CreateShapeCommand createShapeCommand) {
+        if(createShapeCommand.getParameters().size() != 2 || createShapeCommand.getParameters().get(0) <= 0 || createShapeCommand.getParameters().get(1) <= 0){
             throw new WrongEntityParametersException("Wrong rectangle parameters");
         }
         Rectangle rectangle = new Rectangle();
-        rectangle.setType(createShapeCommands.getType().trim().toLowerCase());
-        rectangle.setWidth(createShapeCommands.getParameters().get(0));
-        rectangle.setHeight(createShapeCommands.getParameters().get(1));
+        rectangle.setType(createShapeCommand.getType().trim().toLowerCase());
+        rectangle.setWidth(createShapeCommand.getParameters().get(0));
+        rectangle.setHeight(createShapeCommand.getParameters().get(1));
         return rectangle;
+    }
+
+    @Override
+    public Shape updateShape(Shape shape, UpdateShapeCommand updateShapeCommand) {
+        if(updateShapeCommand.getParameters().size() != 2 || updateShapeCommand.getParameters().get(0) <= 0 || updateShapeCommand.getParameters().get(1) <= 0){
+            throw new WrongEntityParametersException("Wrong rectangle parameters");
+        }
+        Rectangle rectangle = (Rectangle) shape;
+        if(rectangle.getWidth() == updateShapeCommand.getParameters().get(0) && rectangle.getHeight() == updateShapeCommand.getParameters().get(1)){
+            throw new TheSameParametersException("Rectangle width and height to change are the same as the current ones");
+        }
+        rectangle.setWidth(updateShapeCommand.getParameters().get(0));
+        rectangle.setHeight(updateShapeCommand.getParameters().get(1));
+        return rectangle;
+    }
+
+    @Override
+    public ChangeEvent getChangeEvent(Shape loadedShape, UpdateShapeCommand updateShapeCommand) {
+        Rectangle loadedRectangle = (Rectangle) loadedShape;
+        List<ChangeDetails> changeDetails = new ArrayList<>();
+        if(loadedRectangle.getWidth() != updateShapeCommand.getParameters().get(0)){
+            changeDetails.add(new ChangeDetails("width", loadedRectangle.getWidth(), updateShapeCommand.getParameters().get(0)));
+        }
+        if(loadedRectangle.getHeight() != updateShapeCommand.getParameters().get(1)){
+            changeDetails.add(new ChangeDetails("height", loadedRectangle.getHeight(), updateShapeCommand.getParameters().get(1)));
+        }
+        return new ChangeEvent(LocalDateTime.now(), loadedShape.getId(), changeDetails, "ADMIN");
     }
 
     @Override

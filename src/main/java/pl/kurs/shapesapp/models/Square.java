@@ -1,9 +1,12 @@
 package pl.kurs.shapesapp.models;
 
+
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import lombok.*;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+
+
 
 @Entity
 @DiscriminatorValue("1")

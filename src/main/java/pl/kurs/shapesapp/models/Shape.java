@@ -1,8 +1,10 @@
 package pl.kurs.shapesapp.models;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@Table(name = "shapes")
 public class Shape implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

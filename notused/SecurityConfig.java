@@ -1,4 +1,4 @@
-package pl.kurs.shapesapp.config;
+package pl.kurs.shapesapp.notused;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

@@ -1,13 +1,21 @@
 package pl.kurs.shapesapp.models.shapes;
 
+import jakarta.persistence.ElementCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import pl.kurs.shapesapp.commands.CreateShapeCommands;
+import pl.kurs.shapesapp.commands.CreateShapeCommand;
+import pl.kurs.shapesapp.commands.UpdateShapeCommand;
 import pl.kurs.shapesapp.dto.CircleDto;
 import pl.kurs.shapesapp.dto.ShapeDto;
+import pl.kurs.shapesapp.exceptions.TheSameParametersException;
 import pl.kurs.shapesapp.exceptions.WrongEntityParametersException;
 import pl.kurs.shapesapp.models.Circle;
 import pl.kurs.shapesapp.models.Shape;
+import pl.kurs.shapesapp.models.changes.ChangeDetails;
+import pl.kurs.shapesapp.models.changes.ChangeEvent;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 public class CircleImpl implements IShape{
@@ -24,15 +32,36 @@ public class CircleImpl implements IShape{
     }
 
     @Override
-    public Shape createShape(CreateShapeCommands createShapeCommands) {
-        if(createShapeCommands.getParameters().size() != 1 || createShapeCommands.getParameters().get(0) <= 0){
+    public Shape createShape(CreateShapeCommand createShapeCommand) {
+        if(createShapeCommand.getParameters().size() != 1 || createShapeCommand.getParameters().get(0) <= 0){
             throw new WrongEntityParametersException("Wrong circle parameters");
         }
         Circle circle = new Circle();
-        circle.setType(createShapeCommands.getType().trim().toLowerCase());
-        circle.setRadius(createShapeCommands.getParameters().get(0));
+        circle.setType(createShapeCommand.getType().trim().toLowerCase());
+        circle.setRadius(createShapeCommand.getParameters().get(0));
         return circle;
     }
+
+    @Override
+    public Shape updateShape(Shape shape, UpdateShapeCommand updateShapeCommand) {
+        if(updateShapeCommand.getParameters().size() != 1 || updateShapeCommand.getParameters().get(0) <= 0){
+            throw new WrongEntityParametersException("Wrong circle parameters");
+        }
+        Circle circle = (Circle) shape;
+        if(circle.getRadius() == updateShapeCommand.getParameters().get(0)){
+            throw new TheSameParametersException("Circle radius to change is the same as the current one");
+        }
+        circle.setRadius(updateShapeCommand.getParameters().get(0));
+        return circle;
+    }
+
+    @Override
+    public ChangeEvent getChangeEvent(Shape loadedShape, UpdateShapeCommand updateShapeCommand) {
+        Circle loadedCircle = (Circle) loadedShape;
+        ChangeDetails changeDetails = new ChangeDetails("radius", loadedCircle.getRadius(), updateShapeCommand.getParameters().get(0));
+        return new ChangeEvent(LocalDateTime.now(), loadedShape.getId(), List.of(changeDetails), "ADMIN");
+    }
+
 
     @Override
     public ShapeDto response(Shape shape) {

@@ -6,6 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import pl.kurs.shapesapp.exceptions.NotFoundException;
+import pl.kurs.shapesapp.exceptions.TheSameParametersException;
 import pl.kurs.shapesapp.exceptions.UnknownShapeException;
 import pl.kurs.shapesapp.exceptions.WrongEntityParametersException;
 
@@ -28,6 +29,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UnknownShapeException.class)
     public ResponseEntity<ExceptionResponseDto> handleNotFoundException(UnknownShapeException e){
+        ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto(
+                List.of(e.getMessage()),
+                "BAD_REQUEST",
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(exceptionResponseDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TheSameParametersException.class)
+    public ResponseEntity<ExceptionResponseDto> handleNotFoundException(TheSameParametersException e){
         ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto(
                 List.of(e.getMessage()),
                 "BAD_REQUEST",
