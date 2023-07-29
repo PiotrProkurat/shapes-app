@@ -28,6 +28,8 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/v1/users/**")
                 .permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/shapes/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

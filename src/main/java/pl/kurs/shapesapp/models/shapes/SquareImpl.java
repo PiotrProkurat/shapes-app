@@ -59,7 +59,7 @@ public class SquareImpl implements IShape{
     public ChangeEvent getChangeEvent(Shape loadedShape, UpdateShapeCommand updateShapeCommand) {
         Square loadedSquare = (Square) loadedShape;
         ChangeDetails changeDetails = new ChangeDetails("width", loadedSquare.getWidth(), updateShapeCommand.getParameters().get(0));
-        return new ChangeEvent(LocalDateTime.now(), loadedShape.getId(), List.of(changeDetails), "ADMIN");
+        return new ChangeEvent(loadedShape.getId(), List.of(changeDetails));
     }
 
     @Override

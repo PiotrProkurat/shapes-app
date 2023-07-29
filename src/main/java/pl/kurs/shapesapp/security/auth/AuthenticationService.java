@@ -3,8 +3,8 @@ package pl.kurs.shapesapp.security.auth;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.kurs.shapesapp.exceptions.NotFoundException;
 import pl.kurs.shapesapp.models.user.User;
 import pl.kurs.shapesapp.repositories.UserRepository;
 import pl.kurs.shapesapp.security.services.JwtService;
@@ -23,7 +23,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        User user = userRepository.findByLogin(request.getLogin()).orElseThrow(() -> new NotFoundException("Not found user with login: " + request.getLogin()));
+        User user = userRepository.findByLogin(request.getLogin()).orElseThrow(() -> new UsernameNotFoundException("Not found user with login: " + request.getLogin()));
         String jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(jwtToken);
     }

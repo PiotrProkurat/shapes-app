@@ -5,8 +5,10 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.kurs.shapesapp.models.Shape;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,10 +24,14 @@ public class User implements UserDetails {
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String login;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
+    private List<Shape> shapes = new ArrayList<>();
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
