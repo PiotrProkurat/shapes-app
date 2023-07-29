@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByLogin(String login);
-    @Transactional
     @Query("SELECT u FROM User u INNER JOIN u.shapes")
     Page<User> findUsersWithShapes(Pageable pageable);
 }

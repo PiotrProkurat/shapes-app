@@ -14,6 +14,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 
@@ -23,7 +24,7 @@ public class JwtService {
     @Value("${jwt.secret}")
     private String secretKey;
 
-    public static final long JWT_TOKEN_VALIDITY = 604800000;
+    public static final long JWT_TOKEN_VALIDITY = TimeUnit.HOURS.toMillis(24);
 
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);

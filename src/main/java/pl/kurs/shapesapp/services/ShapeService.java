@@ -4,6 +4,7 @@ package pl.kurs.shapesapp.services;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -64,7 +65,7 @@ public class ShapeService {
     }
 
     @Transactional
-    public Shape edit(Long id, UpdateShapeCommand updateShapeCommand){
+    public Shape edit(Long id, UpdateShapeCommand updateShapeCommand) {
         Shape loadedShape = shapeRepository.findById(id).orElseThrow(() -> new NotFoundException("Not found shape with id: " + id));
         changeEventService.create(shapes.get(loadedShape.getType()).getChangeEvent(loadedShape, updateShapeCommand));
         Shape shapeToUpdate = shapes.get(loadedShape.getType()).updateShape(loadedShape, updateShapeCommand);
@@ -73,6 +74,19 @@ public class ShapeService {
 
     public ShapeDto getResponse(Shape shape) {
         return shapes.get(shape.getType()).response(shape);
+    }
+
+    public boolean isShapeCreatedByCurrentUser(Long shapeId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            User currentUser = (User) authentication.getPrincipal();
+            Optional<Shape> optionalShape = shapeRepository.findById(shapeId);
+            if (optionalShape.isPresent()) {
+                Shape shape = optionalShape.get();
+                return shape.getCreatedBy().equals(currentUser.getLogin());
+            }
+        }
+        return false;
     }
 
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.kurs.shapesapp.commands.CreateShapeCommand;
 import pl.kurs.shapesapp.commands.UpdateShapeCommand;
@@ -16,6 +17,7 @@ import pl.kurs.shapesapp.dto.ChangeEventDto;
 import pl.kurs.shapesapp.dto.ShapeDto;
 import pl.kurs.shapesapp.models.Shape;
 import pl.kurs.shapesapp.models.changes.ChangeEvent;
+import pl.kurs.shapesapp.models.user.Role;
 import pl.kurs.shapesapp.services.ChangeEventService;
 import pl.kurs.shapesapp.services.ShapeService;
 
@@ -45,12 +47,14 @@ public class ShapeController {
         return ResponseEntity.ok(shapesDto);
     }
 
+    @PreAuthorize("@shapeService.isShapeCreatedByCurrentUser(#id) or hasAuthority('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<ShapeDto> updateShape(@PathVariable Long id, @RequestBody UpdateShapeCommand updateShapeCommand){
         Shape shape = shapeService.edit(id, updateShapeCommand);
         return new ResponseEntity<>(shapeService.getResponse(shape), HttpStatus.OK);
     }
 
+    @PreAuthorize("@shapeService.isShapeCreatedByCurrentUser(#id) or hasAuthority('ADMIN')")
     @GetMapping("/{id}/changes")
     public ResponseEntity<Page<ChangeEventDto>> getShapeChanges(@PageableDefault(sort = "date", direction = Sort.Direction.ASC) Pageable pageable, @PathVariable Long id){
         Page<ChangeEvent> changeEvents = changeEventService.getAllChangesShapeWithId(pageable, id);
