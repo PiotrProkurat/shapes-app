@@ -16,14 +16,14 @@ import java.util.Optional;
 public class ChangeEventService {
     private final ChangeEventRepository changeEventRepository;
 
-    public ChangeEvent create(ChangeEvent changeEvent){
+    public ChangeEvent create(ChangeEvent changeEvent) {
         return changeEventRepository.save(
                 Optional.ofNullable(changeEvent)
                         .filter(x -> Objects.isNull(x.getId()))
                         .orElseThrow(() -> new WrongEntityParametersException("Wrong entity for persist!")));
     }
 
-    public Page<ChangeEvent> getAllChangesShapeWithId (Pageable pageable, Long id){
+    public Page<ChangeEvent> getAllChangesShapeWithId(Pageable pageable, Long id) {
         return changeEventRepository.findAllByIdChangedShapeIs(pageable, id);
     }
 }

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="shape_type", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name = "shape_type", discriminatorType = DiscriminatorType.INTEGER)
 @Getter
 @Setter
 @AllArgsConstructor
@@ -43,7 +43,7 @@ public class Shape implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public void addUser(User user){
+    public void addUser(User user) {
         this.setUser(user);
         user.getShapes().add(this);
     }

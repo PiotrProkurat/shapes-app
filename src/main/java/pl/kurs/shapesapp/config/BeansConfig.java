@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import java.util.Set;
 
 @Configuration
-@EnableJpaAuditing(auditorAwareRef="auditorProvider")
+@EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 public class BeansConfig {
 
     @Bean
@@ -25,5 +25,4 @@ public class BeansConfig {
     AuditorAware<String> auditorProvider() {
         return new SpringSecurityAuditorAware();
     }
-
 }

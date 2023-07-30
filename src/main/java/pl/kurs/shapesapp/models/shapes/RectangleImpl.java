@@ -10,11 +10,9 @@ import pl.kurs.shapesapp.exceptions.TheSameParametersException;
 import pl.kurs.shapesapp.exceptions.WrongEntityParametersException;
 import pl.kurs.shapesapp.models.Rectangle;
 import pl.kurs.shapesapp.models.Shape;
-import pl.kurs.shapesapp.models.Square;
 import pl.kurs.shapesapp.models.changes.ChangeDetails;
 import pl.kurs.shapesapp.models.changes.ChangeEvent;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

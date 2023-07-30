@@ -6,8 +6,6 @@ import jakarta.persistence.Entity;
 import lombok.*;
 
 
-
-
 @Entity
 @DiscriminatorValue("3")
 @Getter
@@ -15,6 +13,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Circle extends Shape{
+public class Circle extends Shape {
     private double radius;
 }

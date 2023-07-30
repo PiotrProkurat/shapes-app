@@ -1,6 +1,5 @@
 package pl.kurs.shapesapp.dto;
 
-import jakarta.persistence.ElementCollection;
 import lombok.Getter;
 import lombok.Setter;
 import pl.kurs.shapesapp.models.changes.ChangeDetails;

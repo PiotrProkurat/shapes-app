@@ -25,19 +25,17 @@ public class UserController {
     private final ModelMapper modelMapper;
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserCommand createUserCommand){
+    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserCommand createUserCommand) {
         User user = userService.create(createUserCommand);
         return new ResponseEntity<>(modelMapper.map(user, UserDto.class), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<Page<UserDto>> getAllUsers(@PageableDefault(sort = "firstName", direction = Sort.Direction.ASC) Pageable pageable){
+    public ResponseEntity<Page<UserDto>> getAllUsers(@PageableDefault(sort = "firstName", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<User> users = userService.getAllUsers(pageable);
         Page<UserDto> usersDto = new PageImpl<>(users.stream()
                 .map(x -> modelMapper.map(x, UserDto.class))
                 .collect(Collectors.toList()), pageable, users.getTotalElements());
         return ResponseEntity.ok(usersDto);
     }
-
-
 }

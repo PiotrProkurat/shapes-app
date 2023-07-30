@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**")
                 .permitAll()
-                .requestMatchers( "/api/v1/users")
+                .requestMatchers("/api/v1/users")
                 .permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/shapes")
                 .permitAll()

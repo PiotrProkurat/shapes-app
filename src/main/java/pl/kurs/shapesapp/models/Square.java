@@ -6,8 +6,6 @@ import jakarta.persistence.Entity;
 import lombok.*;
 
 
-
-
 @Entity
 @DiscriminatorValue("1")
 @Getter

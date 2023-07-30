@@ -8,13 +8,11 @@ import pl.kurs.shapesapp.dto.ShapeDto;
 import pl.kurs.shapesapp.dto.SquareDto;
 import pl.kurs.shapesapp.exceptions.TheSameParametersException;
 import pl.kurs.shapesapp.exceptions.WrongEntityParametersException;
-import pl.kurs.shapesapp.models.Circle;
 import pl.kurs.shapesapp.models.Shape;
 import pl.kurs.shapesapp.models.Square;
 import pl.kurs.shapesapp.models.changes.ChangeDetails;
 import pl.kurs.shapesapp.models.changes.ChangeEvent;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Component

@@ -1,7 +1,6 @@
 package pl.kurs.shapesapp.config.converter;
 
 
-
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.stereotype.Component;

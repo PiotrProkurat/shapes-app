@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import lombok.*;
 
 
-
 @Entity
 @DiscriminatorValue("2")
 @Getter
@@ -14,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Rectangle extends Shape{
+public class Rectangle extends Shape {
     private double width;
     private double height;
 }

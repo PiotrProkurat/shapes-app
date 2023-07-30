@@ -1,6 +1,5 @@
 package pl.kurs.shapesapp.models.shapes;
 
-import jakarta.persistence.ElementCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import pl.kurs.shapesapp.commands.CreateShapeCommand;
@@ -14,11 +13,10 @@ import pl.kurs.shapesapp.models.Shape;
 import pl.kurs.shapesapp.models.changes.ChangeDetails;
 import pl.kurs.shapesapp.models.changes.ChangeEvent;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
-public class CircleImpl implements IShape{
+public class CircleImpl implements IShape {
 
     private final ModelMapper modelMapper;
 
@@ -33,7 +31,7 @@ public class CircleImpl implements IShape{
 
     @Override
     public Shape createShape(CreateShapeCommand createShapeCommand) {
-        if(createShapeCommand.getParameters().size() != 1 || createShapeCommand.getParameters().get(0) <= 0){
+        if (createShapeCommand.getParameters().size() != 1 || createShapeCommand.getParameters().get(0) <= 0) {
             throw new WrongEntityParametersException("Wrong circle parameters");
         }
         Circle circle = new Circle();
@@ -44,11 +42,11 @@ public class CircleImpl implements IShape{
 
     @Override
     public Shape updateShape(Shape shape, UpdateShapeCommand updateShapeCommand) {
-        if(updateShapeCommand.getParameters().size() != 1 || updateShapeCommand.getParameters().get(0) <= 0){
+        if (updateShapeCommand.getParameters().size() != 1 || updateShapeCommand.getParameters().get(0) <= 0) {
             throw new WrongEntityParametersException("Wrong circle parameters");
         }
         Circle circle = (Circle) shape;
-        if(circle.getRadius() == updateShapeCommand.getParameters().get(0)){
+        if (circle.getRadius() == updateShapeCommand.getParameters().get(0)) {
             throw new TheSameParametersException("Circle radius to change is the same as the current one");
         }
         circle.setRadius(updateShapeCommand.getParameters().get(0));

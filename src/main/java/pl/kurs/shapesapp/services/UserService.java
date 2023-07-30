@@ -27,7 +27,7 @@ public class UserService {
     }
 
 
-    public User create(CreateUserCommand createUserCommand){
+    public User create(CreateUserCommand createUserCommand) {
         User user = modelMapper.map(createUserCommand, User.class);
         user.setPassword(passwordEncoder.encode(createUserCommand.getPassword()));
         return userRepository.save(
@@ -36,7 +36,7 @@ public class UserService {
                         .orElseThrow(() -> new WrongEntityParametersException("Wrong entity for persist!")));
     }
 
-    public Page<User> getAllUsers(Pageable pageable){
+    public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findUsersWithShapes(pageable);
     }
 }

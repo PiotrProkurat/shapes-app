@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionResponseDto> handleNotFoundException(NotFoundException e){
+    public ResponseEntity<ExceptionResponseDto> handleNotFoundException(NotFoundException e) {
         ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto(
                 List.of(e.getMessage()),
                 "NOT_FOUND",
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UnknownShapeException.class)
-    public ResponseEntity<ExceptionResponseDto> handleNotFoundException(UnknownShapeException e){
+    public ResponseEntity<ExceptionResponseDto> handleNotFoundException(UnknownShapeException e) {
         ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto(
                 List.of(e.getMessage()),
                 "BAD_REQUEST",
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(TheSameParametersException.class)
-    public ResponseEntity<ExceptionResponseDto> handleNotFoundException(TheSameParametersException e){
+    public ResponseEntity<ExceptionResponseDto> handleNotFoundException(TheSameParametersException e) {
         ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto(
                 List.of(e.getMessage()),
                 "BAD_REQUEST",
@@ -48,7 +48,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(WrongEntityParametersException.class)
-    public ResponseEntity<ExceptionResponseDto> handleNotFoundException(WrongEntityParametersException e){
+    public ResponseEntity<ExceptionResponseDto> handleNotFoundException(WrongEntityParametersException e) {
         ExceptionResponseDto exceptionResponseDto = new ExceptionResponseDto(
                 List.of(e.getMessage()),
                 "BAD_REQUEST",
@@ -58,7 +58,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ExceptionResponseDto> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+    public ResponseEntity<ExceptionResponseDto> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         List<String> fieldsErrorsMessages = e.getFieldErrors()
                 .stream()
                 .map(fieldError -> "field: " + fieldError.getField() + " / rejected value: '" + fieldError.getRejectedValue() + "' / message:  " + fieldError.getDefaultMessage())
