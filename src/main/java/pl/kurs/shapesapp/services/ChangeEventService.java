@@ -8,6 +8,7 @@ import pl.kurs.shapesapp.exceptions.WrongEntityParametersException;
 import pl.kurs.shapesapp.models.changes.ChangeEvent;
 import pl.kurs.shapesapp.repositories.ChangeEventRepository;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -26,4 +27,5 @@ public class ChangeEventService {
     public Page<ChangeEvent> getAllChangesShapeWithId(Pageable pageable, Long id) {
         return changeEventRepository.findAllByIdChangedShapeIs(pageable, id);
     }
+
 }

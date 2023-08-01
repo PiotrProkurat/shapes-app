@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+
+    <changeSet id="20230801-dev01-001" author="Piotr">
+        <createTable tableName="shapes">
+            <column name="shape_type" type="varchar(255)" />
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="date" />
+            <column name="created_by" type="varchar(255)" />
+            <column name="last_modified_at" type="date" />
+            <column name="last_modified_by" type="varchar(255)" />
+            <column name="type" type="varchar(255)" />
+            <column name="version" type="int"/>
+            <column name="radius" type="double"/>
+            <column name="height" type="double"/>
+            <column name="width" type="double"/>
+            <column name="user_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="varchar(255)" />
+            <column name="last_name" type="varchar(255)" />
+            <column name="login" type="varchar(255)" >
+                <constraints unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)" />
+            <column name="role" type="varchar(255)" />
+        </createTable>
+
+        <createTable tableName="change_events">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="date" type="date" />
+            <column name="id_changed_shape" type="bigint" />
+            <column name="change_author" type="varchar(255)" />
+        </createTable>
+
+        <createTable tableName="change_details">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="parameter_name" type="varchar(255)" />
+            <column name="previous_value" type="double" />
+            <column name="current_value" type="double" />
+            <column name="change_event_id" type="bigint"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="shapes"
+                                 constraintName="fk_shape_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+        <addForeignKeyConstraint baseColumnNames="change_event_id"
+                                 baseTableName="change_details"
+                                 constraintName="fk_changeDetails_changeEvent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="change_events"/>
+    </changeSet>
+
+
+
+
+
+</databaseChangeLog>

@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+
+<!--    SHAPE TYPE:-->
+<!--    1 - SQUARE-->
+<!--    2 - RECTANGLE-->
+<!--    3 - CIRCLE-->
+<!--    -->
+<!--    Passwords all users: 123-->
+
+    <property name="now" value="now()" dbms="h2"/>
+    <changeSet id="20230801-dev01-002" author="Piotr">
+<!--        USER 1-->
+        <insert tableName="users">
+            <column name="first_name" value="Jan"/>
+            <column name="last_name" value="Nowak"/>
+            <column name="login" value="JanNowak"/>
+            <column name="password" value="$2a$10$SZpVWrC8QNgmNq5FUKUWuu5GljoGDmRI4xmLaGT8M.r3mDvKmTQ1q"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="1"/>
+            <column name="type" value="square"/>
+            <column name="width" value="10"/>
+            <column name="user_id" value="1"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="JanNowak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="JanNowak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="20"/>
+            <column name="height" value="30"/>
+            <column name="user_id" value="1"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="JanNowak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="JanNowak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="12"/>
+            <column name="user_id" value="1"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="JanNowak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="JanNowak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="17"/>
+            <column name="user_id" value="1"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="JanNowak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="JanNowak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="42"/>
+            <column name="height" value="38"/>
+            <column name="user_id" value="1"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="JanNowak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="JanNowak"/>
+        </insert>
+
+<!--        USER 2-->
+        <insert tableName="users">
+            <column name="first_name" value="Tomasz"/>
+            <column name="last_name" value="Szpak"/>
+            <column name="login" value="ToSzpak"/>
+            <column name="password" value="$2a$10$m.r80IrwjJcvuiKbuGWoAua3Ep/MSJGUZXK53iUD/PLtpREVcutFa"/>
+            <column name="role" value="CREATOR"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="1"/>
+            <column name="type" value="square"/>
+            <column name="width" value="12"/>
+            <column name="user_id" value="2"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="ToSzpak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="ToSzpak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="5"/>
+            <column name="height" value="7"/>
+            <column name="user_id" value="2"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="ToSzpak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="ToSzpak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="122"/>
+            <column name="user_id" value="2"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="ToSzpak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="ToSzpak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="31"/>
+            <column name="user_id" value="2"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="ToSzpak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="ToSzpak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="48"/>
+            <column name="height" value="28"/>
+            <column name="user_id" value="2"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="ToSzpak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="ToSzpak"/>
+        </insert>
+
+        <!--        USER 3-->
+        <insert tableName="users">
+            <column name="first_name" value="Karol"/>
+            <column name="last_name" value="Polak"/>
+            <column name="login" value="PolKa"/>
+            <column name="password" value="$2a$10$m.r80IrwjJcvuiKbuGWoAua3Ep/MSJGUZXK53iUD/PLtpREVcutFa"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="1"/>
+            <column name="type" value="square"/>
+            <column name="width" value="33"/>
+            <column name="user_id" value="3"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="PolKa"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="PolKa"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="15"/>
+            <column name="height" value="17"/>
+            <column name="user_id" value="3"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="PolKa"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="PolKa"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="46"/>
+            <column name="user_id" value="3"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="PolKa"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="PolKa"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="29"/>
+            <column name="user_id" value="3"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="PolKa"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="PolKa"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="33"/>
+            <column name="height" value="34"/>
+            <column name="user_id" value="3"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="PolKa"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="PolKa"/>
+        </insert>
+
+        <!--        USER 4-->
+        <insert tableName="users">
+            <column name="first_name" value="Mariusz"/>
+            <column name="last_name" value="Lis"/>
+            <column name="login" value="MaLis"/>
+            <column name="password" value="$2a$10$m.r80IrwjJcvuiKbuGWoAua3Ep/MSJGUZXK53iUD/PLtpREVcutFa"/>
+            <column name="role" value="CREATOR"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="1"/>
+            <column name="type" value="square"/>
+            <column name="width" value="66"/>
+            <column name="user_id" value="4"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="MaLis"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="MaLis"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="21"/>
+            <column name="height" value="19"/>
+            <column name="user_id" value="4"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="MaLis"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="MaLis"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="4"/>
+            <column name="user_id" value="4"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="MaLis"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="MaLis"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="33"/>
+            <column name="user_id" value="4"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="MaLis"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="MaLis"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="54"/>
+            <column name="height" value="45"/>
+            <column name="user_id" value="4"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="MaLis"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="MaLis"/>
+        </insert>
+
+        <!--        USER 5-->
+        <insert tableName="users">
+            <column name="first_name" value="Kamila"/>
+            <column name="last_name" value="Kowalska"/>
+            <column name="login" value="KowalskaK"/>
+            <column name="password" value="$2a$10$m.r80IrwjJcvuiKbuGWoAua3Ep/MSJGUZXK53iUD/PLtpREVcutFa"/>
+            <column name="role" value="CREATOR"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="1"/>
+            <column name="type" value="square"/>
+            <column name="width" value="11"/>
+            <column name="user_id" value="5"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="KowalskaK"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="KowalskaK"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="31"/>
+            <column name="height" value="89"/>
+            <column name="user_id" value="5"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="KowalskaK"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="KowalskaK"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="11"/>
+            <column name="user_id" value="5"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="KowalskaK"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="KowalskaK"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="13"/>
+            <column name="user_id" value="5"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="KowalskaK"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="KowalskaK"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="61"/>
+            <column name="height" value="72"/>
+            <column name="user_id" value="5"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="KowalskaK"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="KowalskaK"/>
+        </insert>
+
+        <!--        USER 6-->
+        <insert tableName="users">
+            <column name="first_name" value="Weronika"/>
+            <column name="last_name" value="Wisniewska"/>
+            <column name="login" value="Wisnia"/>
+            <column name="password" value="$2a$10$m.r80IrwjJcvuiKbuGWoAua3Ep/MSJGUZXK53iUD/PLtpREVcutFa"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="1"/>
+            <column name="type" value="square"/>
+            <column name="width" value="18"/>
+            <column name="user_id" value="6"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="Wisnia"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="Wisnia"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="22"/>
+            <column name="height" value="56"/>
+            <column name="user_id" value="6"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="Wisnia"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="Wisnia"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="14"/>
+            <column name="user_id" value="6"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="Wisnia"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="Wisnia"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="18"/>
+            <column name="user_id" value="6"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="Wisnia"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="Wisnia"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="22"/>
+            <column name="height" value="44"/>
+            <column name="user_id" value="6"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="Wisnia"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="Wisnia"/>
+        </insert>
+
+        <!--        USER 7-->
+        <insert tableName="users">
+            <column name="first_name" value="Artur"/>
+            <column name="last_name" value="Wrona"/>
+            <column name="login" value="WronaA"/>
+            <column name="password" value="$2a$10$m.r80IrwjJcvuiKbuGWoAua3Ep/MSJGUZXK53iUD/PLtpREVcutFa"/>
+            <column name="role" value="CREATOR"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="1"/>
+            <column name="type" value="square"/>
+            <column name="width" value="18"/>
+            <column name="user_id" value="7"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="WronaA"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="WronaA"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="22"/>
+            <column name="height" value="56"/>
+            <column name="user_id" value="7"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="WronaA"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="WronaA"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="14"/>
+            <column name="user_id" value="7"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="WronaA"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="WronaA"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="18"/>
+            <column name="user_id" value="7"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="WronaA"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="WronaA"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="22"/>
+            <column name="height" value="44"/>
+            <column name="user_id" value="7"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="WronaA"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="WronaA"/>
+        </insert>
+
+        <!--        USER 8-->
+        <insert tableName="users">
+            <column name="first_name" value="Monika"/>
+            <column name="last_name" value="Wesolowska"/>
+            <column name="login" value="Wesolka"/>
+            <column name="password" value="$2a$10$m.r80IrwjJcvuiKbuGWoAua3Ep/MSJGUZXK53iUD/PLtpREVcutFa"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="1"/>
+            <column name="type" value="square"/>
+            <column name="width" value="21"/>
+            <column name="user_id" value="8"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="Wesolka"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="Wesolka"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="25"/>
+            <column name="height" value="31"/>
+            <column name="user_id" value="8"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="Wesolka"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="Wesolka"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="77"/>
+            <column name="user_id" value="8"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="Wesolka"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="Wesolka"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="23"/>
+            <column name="user_id" value="8"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="Wesolka"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="Wesolka"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="69"/>
+            <column name="height" value="12"/>
+            <column name="user_id" value="8"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="Wesolka"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="Wesolka"/>
+        </insert>
+
+        <!--        USER 9-->
+        <insert tableName="users">
+            <column name="first_name" value="Emilia"/>
+            <column name="last_name" value="Bak"/>
+            <column name="login" value="EmBak"/>
+            <column name="password" value="$2a$10$m.r80IrwjJcvuiKbuGWoAua3Ep/MSJGUZXK53iUD/PLtpREVcutFa"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="1"/>
+            <column name="type" value="square"/>
+            <column name="width" value="15"/>
+            <column name="user_id" value="9"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="EmBak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="EmBak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="48"/>
+            <column name="height" value="12"/>
+            <column name="user_id" value="9"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="EmBak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="EmBak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="43"/>
+            <column name="user_id" value="9"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="EmBak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="EmBak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="19"/>
+            <column name="user_id" value="9"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="EmBak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="EmBak"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="36"/>
+            <column name="height" value="63"/>
+            <column name="user_id" value="9"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="EmBak"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="EmBak"/>
+        </insert>
+
+        <!--        USER 10-->
+        <insert tableName="users">
+            <column name="first_name" value="Paulina"/>
+            <column name="last_name" value="Baran"/>
+            <column name="login" value="PaBa"/>
+            <column name="password" value="$2a$10$m.r80IrwjJcvuiKbuGWoAua3Ep/MSJGUZXK53iUD/PLtpREVcutFa"/>
+            <column name="role" value="CREATOR"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="1"/>
+            <column name="type" value="square"/>
+            <column name="width" value="17"/>
+            <column name="user_id" value="10"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="PaBa"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="PaBa"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="99"/>
+            <column name="height" value="42"/>
+            <column name="user_id" value="10"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="PaBa"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="PaBa"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="78"/>
+            <column name="user_id" value="10"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="PaBa"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="PaBa"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="3"/>
+            <column name="type" value="circle"/>
+            <column name="radius" value="39"/>
+            <column name="user_id" value="10"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="PaBa"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="PaBa"/>
+        </insert>
+        <insert tableName="shapes">
+            <column name="shape_type" value="2"/>
+            <column name="type" value="rectangle"/>
+            <column name="width" value="22"/>
+            <column name="height" value="18"/>
+            <column name="user_id" value="10"/>
+            <column name="version" value="0"/>
+            <column name="created_at" value="${now}"/>
+            <column name="created_by" value="PaBa"/>
+            <column name="last_modified_at" value="${now}"/>
+            <column name="last_modified_by" value="PaBa"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>

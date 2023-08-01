@@ -57,7 +57,9 @@ public class CircleImpl implements IShape {
     public ChangeEvent getChangeEvent(Shape loadedShape, UpdateShapeCommand updateShapeCommand) {
         Circle loadedCircle = (Circle) loadedShape;
         ChangeDetails changeDetails = new ChangeDetails("radius", loadedCircle.getRadius(), updateShapeCommand.getParameters().get(0));
-        return new ChangeEvent(loadedShape.getId(), List.of(changeDetails));
+        ChangeEvent changeEvent = new ChangeEvent(loadedShape.getId());
+       changeEvent.addChangeDetails(List.of(changeDetails));
+        return changeEvent;
     }
 
 

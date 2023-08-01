@@ -3,7 +3,6 @@ package pl.kurs.shapesapp.controllers;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -20,6 +19,7 @@ import pl.kurs.shapesapp.models.changes.ChangeEvent;
 import pl.kurs.shapesapp.services.ChangeEventService;
 import pl.kurs.shapesapp.services.ShapeService;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -40,9 +40,7 @@ public class ShapeController {
     @GetMapping
     public ResponseEntity<Page<ShapeDto>> getAllShape(@PageableDefault(sort = "type", direction = Sort.Direction.ASC) Pageable pageable, @RequestParam Map<String, String> parameters) {
         Page<Shape> shapes = shapeService.getAllShape(pageable, parameters);
-        Page<ShapeDto> shapesDto = new PageImpl<>(shapes.stream()
-                .map(shapeService::getResponse)
-                .collect(Collectors.toList()), pageable, shapes.getTotalElements());
+        Page<ShapeDto> shapesDto = shapes.map(shapeService::getResponse);
         return ResponseEntity.ok(shapesDto);
     }
 
@@ -57,9 +55,7 @@ public class ShapeController {
     @GetMapping("/{id}/changes")
     public ResponseEntity<Page<ChangeEventDto>> getShapeChanges(@PageableDefault(sort = "date", direction = Sort.Direction.ASC) Pageable pageable, @PathVariable Long id) {
         Page<ChangeEvent> changeEvents = changeEventService.getAllChangesShapeWithId(pageable, id);
-        Page<ChangeEventDto> changeEventsDto = new PageImpl<>(changeEvents.stream()
-                .map(x -> modelMapper.map(x, ChangeEventDto.class))
-                .collect(Collectors.toList()), pageable, changeEvents.getTotalElements());
+        Page<ChangeEventDto> changeEventsDto = changeEvents.map(x -> modelMapper.map(x, ChangeEventDto.class));
         return ResponseEntity.ok(changeEventsDto);
     }
 

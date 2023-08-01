@@ -65,7 +65,9 @@ public class RectangleImpl implements IShape{
         if(loadedRectangle.getHeight() != updateShapeCommand.getParameters().get(1)){
             changeDetails.add(new ChangeDetails("height", loadedRectangle.getHeight(), updateShapeCommand.getParameters().get(1)));
         }
-        return new ChangeEvent(loadedShape.getId(), changeDetails);
+        ChangeEvent changeEvent = new ChangeEvent(loadedShape.getId());
+        changeEvent.addChangeDetails(changeDetails);
+        return changeEvent;
     }
 
     @Override

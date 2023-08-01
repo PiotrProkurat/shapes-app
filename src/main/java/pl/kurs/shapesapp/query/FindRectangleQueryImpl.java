@@ -1,11 +1,13 @@
 package pl.kurs.shapesapp.query;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.NumberExpression;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 import pl.kurs.shapesapp.models.QRectangle;
+import pl.kurs.shapesapp.models.QShape;
 
 import java.util.Map;
 import java.util.Optional;
@@ -27,10 +29,9 @@ public class FindRectangleQueryImpl implements IFindShapesQuery{
         Optional.ofNullable(parameters.get("widthTo")).map(x -> qRectangle.width.loe(Double.parseDouble(x))).ifPresent(conditions::and);
         Optional.ofNullable(parameters.get("heightFrom")).map(x -> qRectangle.height.goe(Double.parseDouble(x))).ifPresent(conditions::and);
         Optional.ofNullable(parameters.get("heightTo")).map(x -> qRectangle.height.loe(Double.parseDouble(x))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("areaFrom")).map(x -> (area).goe(Double.parseDouble(x)).and(qRectangle.type.containsIgnoreCase("rectangle"))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("areaTo")).map(x -> (area).loe(Double.parseDouble(x)).and(qRectangle.type.containsIgnoreCase("rectangle"))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("perimeterFrom")).map(x -> (perimeter).goe(Double.parseDouble(x)).and(qRectangle.type.containsIgnoreCase("rectangle"))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("perimeterTo")).map(x -> (perimeter).loe(Double.parseDouble(x)).and(qRectangle.type.containsIgnoreCase("rectangle"))).ifPresent(conditions::and);
+        BooleanExpression shapeType = qRectangle.type.containsIgnoreCase("rectangle");
+        FindShapesQuery.checkAreaAndPerimeter(parameters, conditions, area, perimeter, shapeType);
         return conditions;
     }
 }
+

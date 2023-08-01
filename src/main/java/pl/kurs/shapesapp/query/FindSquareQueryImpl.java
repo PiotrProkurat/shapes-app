@@ -1,6 +1,7 @@
 package pl.kurs.shapesapp.query;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.NumberExpression;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,10 +25,8 @@ public class FindSquareQueryImpl implements IFindShapesQuery {
         NumberExpression<Double> perimeter = qSquare.width.multiply(4);
         Optional.ofNullable(parameters.get("widthFrom")).map(x -> qSquare.width.goe(Double.parseDouble(x))).ifPresent(conditions::and);
         Optional.ofNullable(parameters.get("widthTo")).map(x -> qSquare.width.loe(Double.parseDouble(x))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("areaFrom")).map(x -> (area).goe(Double.parseDouble(x)).and(qSquare.type.containsIgnoreCase("square"))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("areaTo")).map(x -> (area).loe(Double.parseDouble(x)).and(qSquare.type.containsIgnoreCase("square"))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("perimeterFrom")).map(x -> (perimeter).goe(Double.parseDouble(x)).and(qSquare.type.containsIgnoreCase("square"))).ifPresent(conditions::and);
-        Optional.ofNullable(parameters.get("perimeterTo")).map(x -> (perimeter).loe(Double.parseDouble(x)).and(qSquare.type.containsIgnoreCase("square"))).ifPresent(conditions::and);
+        BooleanExpression shapeType = qSquare.type.containsIgnoreCase("square");
+        FindShapesQuery.checkAreaAndPerimeter(parameters, conditions, area, perimeter, shapeType);
         return conditions;
     }
 }
